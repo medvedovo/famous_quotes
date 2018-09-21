@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Крутые цитаты</string>
+    <string name="quote_author">— %s</string>
+</resources>
