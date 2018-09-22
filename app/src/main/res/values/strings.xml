@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Крутые цитаты</string>
     <string name="quote_author">— %s</string>
+    <string name="quote_share_format_author">«%s», — %s</string>
+    <string name="quote_share_format_noauthor">«%s»</string>
 </resources>
