@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initHandlers() {
+        swipe_layout.setOnRefreshListener {
+            model.loadQuote()
+            swipe_layout.isRefreshing = false
+        }
+
         fab_refresh.setOnClickListener {
             model.loadQuote()
         }
