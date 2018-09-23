@@ -7,7 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import ru.medvedovo.famousquotes.model.Quote
 
 interface QuoteApi {
@@ -25,10 +24,10 @@ interface QuoteApi {
                 return api as QuoteApi
             }
 
-            val httpLoggin = HttpLoggingInterceptor()
-            httpLoggin.level = HttpLoggingInterceptor.Level.BODY
+            val httpLogging = HttpLoggingInterceptor()
+            httpLogging.level = HttpLoggingInterceptor.Level.BODY
             val httpClient = OkHttpClient.Builder()
-            httpClient.addInterceptor(httpLoggin)
+            httpClient.addInterceptor(httpLogging)
 
             httpClient.addInterceptor {
                 val request = it.request().newBuilder()
