@@ -2,6 +2,7 @@ package ru.medvedovo.famousquotes.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -26,9 +27,8 @@ class MainActivity : AppCompatActivity() {
     private fun initObservers() {
         model.getQuote().observe(this, Observer {
             text_quote_main.text = it.quoteText
-            text_quote_author.text = if (!it.quoteAuthor.isNullOrEmpty())
-                String.format(Locale.getDefault(), getString(R.string.quote_author), it.quoteAuthor)
-            else ""
+            text_quote_author.text = String.format(Locale.getDefault(), getString(R.string.quote_author), it.quoteAuthor)
+            text_quote_author.visibility = if (it.quoteAuthor.isNullOrEmpty()) View.GONE else View.VISIBLE
         })
     }
 
@@ -47,14 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
-                if (quote.quoteAuthor.isNullOrEmpty()) {
-                    putExtra(Intent.EXTRA_TEXT,
-                            String.format(Locale.getDefault(), getString(R.string.quote_share_format_noauthor), quote.quoteText))
-                } else {
-                    putExtra(Intent.EXTRA_TEXT,
-                            String.format(Locale.getDefault(), getString(R.string.quote_share_format_author), quote.quoteText, quote.quoteAuthor))
-
-                }
+                putExtra(Intent.EXTRA_TEXT, quote.getShareQuote())
                 type = "text/plain"
             }
             startActivity(shareIntent)
