@@ -29,16 +29,17 @@ class MainActivity : AppCompatActivity() {
             text_quote_main.text = it.quoteText
             text_quote_author.text = String.format(Locale.getDefault(), getString(R.string.quote_author), it.quoteAuthor)
             text_quote_author.visibility = if (it.quoteAuthor.isNullOrEmpty()) View.GONE else View.VISIBLE
+            swipe_layout.isRefreshing = false
         })
     }
 
     private fun initHandlers() {
         swipe_layout.setOnRefreshListener {
             model.loadQuote()
-            swipe_layout.isRefreshing = false
         }
 
         fab_refresh.setOnClickListener {
+            swipe_layout.isRefreshing = true
             model.loadQuote()
         }
 
