@@ -11,14 +11,14 @@ class QuoteModelTest {
     private val quoteAuthor = "Test author"
 
     @Test
-    fun QuoteFormatWithAuthor_isCorrect() {
+    fun quoteFormatWithAuthor_isCorrect() {
         val model = Quote(quoteText, quoteAuthor)
         val expected = String.format(Locale.getDefault(), "«%s», — %s", quoteText.removeSuffix("."), quoteAuthor)
         assertEquals(model.getShareQuote(), expected)
     }
 
     @Test
-    fun QuoteFormatNoAuthor_isCorrect() {
+    fun quoteFormatNoAuthor_isCorrect() {
         val model = Quote(quoteText)
         val expected = String.format(Locale.getDefault(), "«%s»", quoteText.removeSuffix("."))
         assertEquals(model.getShareQuote(), expected)
